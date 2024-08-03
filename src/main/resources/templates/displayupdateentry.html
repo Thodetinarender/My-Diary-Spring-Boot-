@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyDiary App Homepage</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="header">
+    <div class="first">
+        <img th:src="@{/images/diary.jpg}" width="60" height="60">
+    </div>
+    <div class="second">MyDiary App</div>
+</div>
+
+<br/><br/>
+
+<hr/>
+<br/><br/>
+<h1>Welcome <span style="color:SteelBlue" th:text="${user.username}"></span></h1> 
+<a th:href="@{/signout}" style="color:red;float:right">Signout</a>
+
+<div class="bodypart">
+    <div class="bodypart1">
+        <img th:src="@{/images/diary.jpg}">
+    </div>
+    <div>
+        <h1>UPDATE ENTRY</h1><br/><br/><br/>
+        <form th:action="@{/processentryupdate}" method="POST">
+            <label>Date</label> 
+            <input type="text" name="entrydate" class="formcontrol" th:value="${#dates.format(entry.entrydate, 'yyyy-MM-dd')}" readonly><br/><br/>
+            <label>Description</label> 
+            <textarea rows="10" cols="30" name="description" th:text="${entry.description}"></textarea>
+            <input type="hidden" name="userid" th:value="${user.id}">
+            <input type="hidden" name="id" th:value="${entry.id}">
+            <br/><br/><br/>
+            <button type="submit">UPDATE ENTRY</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
